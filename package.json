@@ -1,0 +1,16 @@
+{
+  "author": "dsimard <dsimard@azanka.ca>",
+  "name": "rochelle",
+  "description": "Strange journey from Milan to Minsk",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dsimard/rochelle.git"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
