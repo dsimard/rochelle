@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git://github.com/dsimard/rochelle.git"
   },
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script test/*.coffee"
+  },
   "dependencies": {
     "mocha"   : "~1.0.3",
     "should"  : "~0.6.3"
