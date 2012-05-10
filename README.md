@@ -1,4 +1,4 @@
 rochelle
 ========
 
-Strange journey from Milan to Minsk
+Strange CSS journey from Milan to Minsk
