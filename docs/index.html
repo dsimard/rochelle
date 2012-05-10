@@ -1,0 +1,18 @@
+<!DOCTYPE html>  <html> <head>   <title>index.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               index.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nv">fs = </span><span class="nx">require</span> <span class="s1">&#39;fs&#39;</span>
+
+<span class="nv">r = </span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Load the main file and aggregate files specified by <em>@import</em></p>
+
+<p><code>file</code> is the complete file path</p>
+
+<p>Callback has one argument <code>data</code> which contains the aggregated css</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">load : </span><span class="nf">(file, callback)-&gt;</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span> <span class="nx">file</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">,</span> <span class="nf">(err, data)-&gt;</span>
+      <span class="nx">unless</span> <span class="nx">err</span>
+        <span class="nv">data = </span><span class="nx">data</span><span class="p">.</span><span class="nx">replace</span> <span class="sr">/\@import/ig</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+        
+      <span class="nx">callback</span> <span class="nx">data</span>
+      
+   
+
+<span class="nv">module.exports = </span><span class="nx">r</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
