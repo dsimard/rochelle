@@ -7,12 +7,12 @@ should = require('should')
 describe 'Rochelle, Rochelle', ->
   describe 'is simple', ->
     it 'fails when file does not exist', (done)->
-      rochelle.load "404.css", (data)->
+      rochelle.load "404.css", (err, data)->
         should.not.exist data
         done()
         
     it 'works', (done)->
-      rochelle.load './test/simple/main.css', (data)->
+      rochelle.load './test/simple/main.css', (err, data)->
         should.exist data
         data.should.not.include '@import'
         done()
