@@ -1,0 +1,5 @@
+@import 'sub2/sub2.css';
+
+#sub1:after {
+  content: "sub1.css";
+}

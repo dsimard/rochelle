@@ -1,4 +1,4 @@
-@import 'imported.css';
+@import 'sub1/sub1.css';
 #main:after {
   content: "main.css";
 }

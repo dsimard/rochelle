@@ -1,7 +1,6 @@
 fs = require 'fs'
 path = require 'path'
-{log} = require 'util'
-{inspect} = require 'util'
+{log, inspect} = require 'util'
 cleanCss = require '../node_modules/clean-css'
 
 r = 
@@ -41,7 +40,7 @@ r =
           else
             # If it should minify the css
             data = cleanCss.process(data) if options.minify
-            #console.log "====\n#{data}\n===="
+            log "====\n#{data}\n===="
             callback(null, data)
             
         replace()

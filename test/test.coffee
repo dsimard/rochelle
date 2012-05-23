@@ -21,7 +21,7 @@ describe 'Rochelle, Rochelle', ->
         should.not.exist err
         should.exist data
         data.should.not.include "@import 'imported.css';"
-        data.should.include "color: blue;"
+        data.should.include 'content: "main.css"'
         done()
         
     it 'can import multiple css', (done)->
@@ -57,3 +57,9 @@ describe 'Rochelle, Rochelle', ->
           previous = data.indexOf(style)
             
       done()
+      
+    it 'loads in sub directories', (done)->
+      rochelle.load './test/sub/main.css', (err, data)->
+        #data.should.not.include "@import"
+        #data.should.include "color: red"
+        done()
