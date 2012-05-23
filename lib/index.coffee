@@ -40,7 +40,7 @@ r =
           else
             # If it should minify the css
             data = cleanCss.process(data) if options.minify
-            log "====\n#{data}\n===="
+            #log "====\n#{data}\n===="
             callback(null, data)
             
         replace()

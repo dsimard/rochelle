@@ -1,12 +1,14 @@
 # mocha --compilers coffee:coffee-script test/*.coffee
 require '../node_modules/should'
 rochelle = require '../lib'
-{inspect} = require 'util'
+{inspect, log} = require 'util'
 should = require 'should'
 cleanCss = require '../node_modules/clean-css'
 
-multiple_styles = ['color: red', 'font-size: 120%', 
-  'margin: 1em', 'background-color: cyan',  'font-family: serif']
+multipleStyles = ->
+  styles = [1..4].map (i)-> "import#{i}.css"          
+  styles.push "main.css"
+  styles
 
 describe 'Rochelle, Rochelle', ->
   describe 'is simple', ->
@@ -24,24 +26,16 @@ describe 'Rochelle, Rochelle', ->
         data.should.include 'content: "main.css"'
         done()
         
-    it 'can import multiple css', (done)->
+    it 'stays in the same order than imports', (done)->
       rochelle.load './test/multiple/main.css', (err, data)->
         should.not.exist err
         data.should.not.include "@import"
-        
-        multiple_styles.forEach (style)->
-            data.should.include style
-        
-        done()
-        
-    it 'stays in the same order than imports', (done)->
-      rochelle.load './test/multiple/main.css', (err, data)->
-        
+
         previous = 0
-        
-        multiple_styles.forEach (style)->
-            data.indexOf(style).should.be.above previous
-            previous = data.indexOf(style)
+
+        multipleStyles().forEach (style)->
+          data.indexOf(style).should.be.above previous
+          previous = data.indexOf(style)
             
         done()
         
@@ -51,7 +45,7 @@ describe 'Rochelle, Rochelle', ->
       
         previous = 0
         
-        multiple_styles.forEach (style)->
+        multipleStyles().forEach (style)->
           style = style.replace(/\s/, '')
           data.indexOf(style).should.be.above previous
           previous = data.indexOf(style)
@@ -59,7 +53,7 @@ describe 'Rochelle, Rochelle', ->
       done()
       
     it 'loads in sub directories', (done)->
-      rochelle.load './test/sub/main.css', (err, data)->
+      #rochelle.load './test/sub/main.css', (err, data)->
         #data.should.not.include "@import"
         #data.should.include "color: red"
         done()
