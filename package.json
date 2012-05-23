@@ -11,10 +11,12 @@
     "test": "mocha --compilers coffee:coffee-script test/*.coffee"
   },
   "dependencies": {
+    "clean-css": "~0.3.2"
+  },
+  "devDependencies": {
     "mocha"   : "~1.0.3",
     "should"  : "~0.6.3"
   },
-  "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
     "node": "*"

@@ -5,7 +5,8 @@ path = require 'path'
 
 r = 
   # Regexp to match an import line
-  IMPORT : /\@import[^;$]+;*/ig
+  IMPORT : /\@import[^;]+;/ig
+  IMPORT_FILE : /\@import\s+(url\(\s*)?[\'\"]([^\'\"]+)/i
   
   # Load the main file and aggregate files specified by _@import_
   #
@@ -20,11 +21,18 @@ r =
         return callback(err) if err
         
         # Find each import
-        data.match(r.IMPORT).forEach (importLine)->
-          r.replaceImport resolved, importLine, (imported)->
-            data = data.replace importLine, imported
-            log inspect(data)
+        imports = data.match r.IMPORT
+        replace = ->
+          if imports?.length > 0
+            importLine = imports[0]
+            r.replaceImport resolved, importLine, (imported)->
+              data = data.replace importLine, imported
+              imports = data.match r.IMPORT
+              replace()
+          else
             callback(null, data)
+            
+        replace()
   
   # Replace an _@import_ line with the css
   #
@@ -34,7 +42,11 @@ r =
     dir = path.dirname importer
   
     # Match the file to import
-    file = (/\@import\s+[\'\"]([^\'\"]+)/i).exec(importLine)[1]
+    matches = r.IMPORT_FILE.exec(importLine)
+    #log "MATCHES for #{inspect(importLine)}"
+    #log inspect(matches)
+    #log "Matches2 #{inspect(matches[2])}"
+    file = matches[2]
     
     # Load the file
     fs.readFile path.resolve(dir, file), (err, data)->
