@@ -4,5 +4,5 @@ node_js:
   - 0.6
   - 0.7 # development version of 0.8, may be unstable
 before_script:
-  ./node_modules/coffee-script/bin/coffee -c -o lib lib
-  ./node_modules/coffee-script/bin/coffee -c -o test test
+  - coffee -c -o lib lib
+  - coffee -c -o test test
