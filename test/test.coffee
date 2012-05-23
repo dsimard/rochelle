@@ -2,7 +2,11 @@
 require '../node_modules/should'
 rochelle = require '../lib'
 {inspect} = require 'util'
-should = require('should')
+should = require 'should'
+cleanCss = require '../node_modules/clean-css'
+
+multiple_styles = ['color: red', 'font-size: 120%', 
+  'margin: 1em', 'background-color: cyan',  'font-family: serif']
 
 describe 'Rochelle, Rochelle', ->
   describe 'is simple', ->
@@ -25,8 +29,31 @@ describe 'Rochelle, Rochelle', ->
         should.not.exist err
         data.should.not.include "@import"
         
-        ['color: red;', 'font-size: 120%', 
-          'margin: 1em;', 'background-color: cyan;'].forEach (style)->
+        multiple_styles.forEach (style)->
             data.should.include style
         
         done()
+        
+    it 'stays in the same order than imports', (done)->
+      rochelle.load './test/multiple/main.css', (err, data)->
+        
+        previous = 0
+        
+        multiple_styles.forEach (style)->
+            data.indexOf(style).should.be.above previous
+            previous = data.indexOf(style)
+            
+        done()
+        
+    it 'minifies the css', (done)->
+      rochelle.load './test/multiple/main.css', {minify:true}, (err, data)->
+        data.ind
+      
+        previous = 0
+        
+        multiple_styles.forEach (style)->
+          style = style.replace(/\s/, '')
+          data.indexOf(style).should.be.above previous
+          previous = data.indexOf(style)
+            
+      done()

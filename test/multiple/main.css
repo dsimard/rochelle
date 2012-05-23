@@ -2,3 +2,7 @@
 @import url('import2.css');
 @import url("import3.css");
 @import "import4.css";
+
+body {
+  font-family: serif;
+}

@@ -2,6 +2,7 @@ fs = require 'fs'
 path = require 'path'
 {log} = require 'util'
 {inspect} = require 'util'
+cleanCss = require '../node_modules/clean-css'
 
 r = 
   # Regexp to match an import line
@@ -12,8 +13,16 @@ r =
   #
   # `file` is the complete file path
   #
-  # Callback has two argument. `err` and `data` which contains the aggregated css
-  load : (file, callback)->
+  # `options` (optional) are the options :
+  #
+  #   - `minify` : If it should minify the CSS
+  #
+  #
+  # `callback` has two argument. `err` and `data` which contains the aggregated css
+  load : (file, options={}, callback)->
+    # If there's no options, use it as the callback
+    [callback, options] = [options, {}] if typeof options == 'function'
+    
     fs.realpath file, (err, resolved)->
       return callback(err) if err
       
@@ -30,6 +39,9 @@ r =
               imports = data.match r.IMPORT
               replace()
           else
+            # If it should minify the css
+            data = cleanCss.process(data) if options.minify
+            #console.log "====\n#{data}\n===="
             callback(null, data)
             
         replace()
