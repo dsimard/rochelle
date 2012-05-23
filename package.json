@@ -8,14 +8,15 @@
     "url": "git://github.com/dsimard/rochelle.git"
   },
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script test/*.coffee"
+    "test": "node ./node_modules/.bin/mocha test/*.js"
   },
   "dependencies": {
     "clean-css": "~0.3.2"
   },
   "devDependencies": {
     "mocha"   : "~1.0.3",
-    "should"  : "~0.6.3"
+    "should"  : "~0.6.3",
+    "coffeescript" : "latest"
   },
   "optionalDependencies": {},
   "engines": {

@@ -1,4 +1,4 @@
-# mocha -w --compilers coffee:coffee-script test/*.coffee
+# mocha --compilers coffee:coffee-script test/*.coffee
 require '../node_modules/should'
 rochelle = require '../lib'
 {inspect} = require 'util'
