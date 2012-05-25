@@ -9,6 +9,11 @@ multipleStyles = ->
   styles = [1..4].map (i)-> "import#{i}.css"          
   styles.push "main.css"
   styles
+  
+subStyles = ->
+  styles = [2..1].map (i)-> "sub#{i}.css"
+  styles.push "main.css"
+  styles
 
 describe 'Rochelle, Rochelle', ->
   describe 'is simple', ->
@@ -38,7 +43,7 @@ describe 'Rochelle, Rochelle', ->
           previous = data.indexOf(style)
             
         done()
-        
+
     it 'minifies the css', (done)->
       rochelle.load './test/multiple/main.css', {minify:true}, (err, data)->
         data.ind
@@ -51,9 +56,16 @@ describe 'Rochelle, Rochelle', ->
           previous = data.indexOf(style)
             
       done()
-      
+    
     it 'loads in sub directories', (done)->
-      #rochelle.load './test/sub/main.css', (err, data)->
-        #data.should.not.include "@import"
-        #data.should.include "color: red"
+      rochelle.load './test/sub/main.css', (err, data)->
+        should.not.exist err
+        data.should.not.include "@import"
+
+        previous = 0
+
+        subStyles().forEach (style)->
+          data.indexOf(style).should.be.above previous
+          previous = data.indexOf(style)
+            
         done()

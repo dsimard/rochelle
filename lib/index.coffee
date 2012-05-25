@@ -27,41 +27,31 @@ r =
       
       fs.readFile resolved, 'utf8', (err, data)->
         return callback(err) if err
-        
-        # Find each import
-        imports = data.match r.IMPORT
-        replace = ->
+
+        # Recursively load the css files and import the css from `@import`
+        importFile = (cssFile)->
+          # Find each import
+          imports = data.match r.IMPORT
+
           if imports?.length > 0
             importLine = imports[0]
-            r.replaceImport resolved, importLine, (imported)->
-              data = data.replace importLine, imported
-              imports = data.match r.IMPORT
-              replace()
-          else
-            # If it should minify the css
-            data = cleanCss.process(data) if options.minify
-            #log "====\n#{data}\n===="
-            callback(null, data)
             
-        replace()
+            # Load the file
+            fileToImport = r.IMPORT_FILE.exec(importLine)[2]
+            importCss = path.resolve(path.join(path.dirname(cssFile), fileToImport))
+            
+            r.loadCss importCss, (loadedCss)->
+              data = data.replace importLine, loadedCss
+              importFile(importCss)
+          else
+            callback(null, data)
+              
+        importFile(resolved)
   
-  # Replace an _@import_ line with the css
-  #
-  # `importer` is the parent file that contains the `import`
-  # `import` is the _@import_ line. 
-  replaceImport : (importer, importLine, callback)->
-    dir = path.dirname importer
-  
-    # Match the file to import
-    matches = r.IMPORT_FILE.exec(importLine)
-    #log "MATCHES for #{inspect(importLine)}"
-    #log inspect(matches)
-    #log "Matches2 #{inspect(matches[2])}"
-    file = matches[2]
-    
-    # Load the file
-    fs.readFile path.resolve(dir, file), (err, data)->
+  # Load a css file
+  loadCss : (file, callback)->
+    fs.readFile file, (err, data)->
       return callback err if err
       callback(data)
-
+      
 module.exports = r
