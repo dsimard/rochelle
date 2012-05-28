@@ -9,11 +9,12 @@
     "url": "git://github.com/dsimard/rochelle.git"
   },
   "bin": {
-    "rochelle": "./bin/rochelle"
+    "rochelle": "./bin/rochelle.js"
   },
   "scripts": {
     "test": "node ./node_modules/.bin/mocha --compilers coffee:coffee-script test/*.coffee",
-    "prepublish": "cake build"
+    "prepublish": "cake build",
+    "publish": "cake clean"
   },
   "dependencies": {
     "clean-css": "~0.3.2",
