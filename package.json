@@ -8,7 +8,7 @@
     "url": "git://github.com/dsimard/rochelle.git"
   },
   "scripts": {
-    "test": "node ./node_modules/.bin/mocha test/*.js"
+    "test": "node ./node_modules/.bin/mocha --compilers coffee:coffee-script test/*.coffee"
   },
   "dependencies": {
     "clean-css": "~0.3.2",
