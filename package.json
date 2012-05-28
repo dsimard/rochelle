@@ -2,13 +2,18 @@
   "author": "dsimard <dsimard@azanka.ca>",
   "name": "rochelle",
   "description": "Strange CSS journey from Milan to Minsk",
-  "version": "0.0.0",
+  "keywords": ["css", "aggregate", "compile", "compiler", "stylesheets"],
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/dsimard/rochelle.git"
   },
+  "bin": {
+    "rochelle": "./bin/rochelle"
+  },
   "scripts": {
-    "test": "node ./node_modules/.bin/mocha --compilers coffee:coffee-script test/*.coffee"
+    "test": "node ./node_modules/.bin/mocha --compilers coffee:coffee-script test/*.coffee",
+    "prepublish": "cake build"
   },
   "dependencies": {
     "clean-css": "~0.3.2",
