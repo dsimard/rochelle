@@ -10,6 +10,44 @@ SUM:                             2             15             19             44
 -------------------------------------------------------------------------------
 </pre></p></td><td id="content" class="code"><h1>rochelle</h1>
 
-<p>Strange CSS journey from Milan to Minsk</p>
+<p>Strange CSS journey from <a href="http://maps.google.com/maps?saddr=Milan&amp;daddr=Minsk">Milan to Minsk</a></p>
 
-<p><a href="http://travis-ci.org/dsimard/rochelle"><img src="https://secure.travis-ci.org/dsimard/rochelle.png?branch=master" alt="Build Status" title="" /></a></p>  </td></tr></tbody></table><div id="generated">generated Mon May 28 2012 09:14:44 GMT-0400 (EDT)  </div><div id="projectname"><a href="./index.html">Rochelle</a></div></div></body></html>
+<p><a href="http://travis-ci.org/dsimard/rochelle"><img src="https://secure.travis-ci.org/dsimard/rochelle.png?branch=master" alt="Build Status" title="" /></a></p>
+
+<h2>What does it do?</h2>
+
+<p>It takes a css file and aggregate its <a href="https://developer.mozilla.org/en/CSS/@import"><code>@import</code></a> rules to a single css file that has the same name</p>
+
+<h2>Example</h2>
+
+<p>Take these two files :</p>
+
+<pre><code>/* /path/to/main.css */
+@import 'import.css'
+body {
+  background-color:red;
+}
+</code></pre>
+
+<p>and </p>
+
+<pre><code>/* path/to/import.css */
+body {
+  color:blue;
+}
+</code></pre>
+
+<p>Call <code>rochelle /path/to/main.css</code> will create <code>/path/to/_main.css</code></p>
+
+<pre><code>body {
+  color:blue;
+}
+
+body {
+  background-color:red;
+}
+</code></pre>
+
+<h2>Use as a library</h2>
+
+<p>Take a look at the <a href="http://dsimard.github.com/rochelle/lib/index.coffee.html">lib</a></p>  </td></tr></tbody></table><div id="generated">generated Mon May 28 2012 14:22:41 GMT-0400 (EDT)  </div></div></body></html>
