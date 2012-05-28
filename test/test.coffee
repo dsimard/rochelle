@@ -4,6 +4,9 @@ rochelle = require '../lib'
 {inspect, log} = require 'util'
 should = require 'should'
 cleanCss = require '../node_modules/clean-css'
+{exec, spawn} = require 'child_process'
+fs = require 'fs'
+path = require 'path'
 
 multipleStyles = ->
   styles = [1..4].map (i)-> "import#{i}.css"          
@@ -69,3 +72,27 @@ describe 'Rochelle, Rochelle', ->
           previous = data.indexOf(style)
             
         done()
+        
+describe 'Rochelle command line', ->
+  afterEach (done)->
+    fs.unlink './test/simple/_main.css', (err)->
+      done()
+  
+  describe 'simple', ->
+    it "throws an error when no file", (done)->
+      exec "coffee bin/rochelle.coffee", (error, stdout, stderr)->
+        should.exist error
+        stderr.should.include 'pass a filename'
+        done()
+        
+    it "works", (done)->
+      exec "coffee bin/rochelle.coffee test/simple/main.css", (err, stdout, stderr)->
+        path.exists "test/simple/_main.css", (exists)->
+          exists.should.be.ok
+          
+          # open the file to see if everything is ok
+          fs.readFile "test/simple/_main.css", 'utf8', (err, data)->
+            data.should.not.include "@import 'imported.css';"
+            data.should.include 'content: "main.css"'
+            
+            done()

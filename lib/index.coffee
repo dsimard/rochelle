@@ -23,10 +23,10 @@ r =
     [callback, options] = [options, {}] if typeof options == 'function'
     
     fs.realpath file, (err, resolved)->
-      return callback(err) if err
+      return callback?(err) if err
       
       fs.readFile resolved, 'utf8', (err, data)->
-        return callback(err) if err
+        return callback?(err) if err
 
         # Recursively load the css files and import the css from `@import`
         importFile = (cssFile)->
@@ -44,7 +44,7 @@ r =
               data = data.replace importLine, loadedCss
               importFile(importCss)
           else
-            callback(null, data)
+            callback?(null, data)
               
         importFile(resolved)
   
