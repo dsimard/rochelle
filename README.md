@@ -24,7 +24,7 @@ and
       color:blue;
     }
     
-Call `rochelle /path/to/main.css` will create `/path/to/_main.css`
+`rochelle /path/to/main.css` will create `/path/to/_main.css`
 
     body {
       color:blue;
