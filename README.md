@@ -17,6 +17,8 @@ Take these two files :
       background-color:red;
     }
     
+and 
+
     /* path/to/import.css */
     body {
       color:blue;
@@ -32,9 +34,9 @@ Call `rochelle /path/to/main.css` will create `/path/to/_main.css`
       background-color:red;
     }
         
-## Use as a librairy
+## Use as a library
 Take a look at the [lib][]
 
-[Milan to Minsk]: http://maps.google.com/maps?saddr=Milan&daddr=Minsk&hl=en&sll=49.6531,18.37378&sspn=12.356542,33.815918&geocode=FYG4tQIdSzOMACk9o6HLTMGGRzGQGnttVt4wpg%3BFeByNgMdS6KkASnTah5b08_bRjHZcLXdU7hhCw&mra=ls&t=m&z=6
+[Milan to Minsk]: http://maps.google.com/maps?saddr=Milan&daddr=Minsk
 [import]: https://developer.mozilla.org/en/CSS/@import
 [lib]: http://dsimard.github.com/rochelle/lib/index.coffee.html
