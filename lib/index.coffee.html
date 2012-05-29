@@ -9,32 +9,36 @@
 </td><td class="code"><div class="highlight"><pre>  <span class="nv">IMPORT : </span><span class="sr">/\@import[^;]+;/ig</span>
   <span class="nv">IMPORT_FILE : </span><span class="sr">/\@import\s+(url\(\s*)?[\&#39;\&quot;]([^\&#39;\&quot;]+)/i</span>
   </pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h1>#</h1>
-</td><td class="code"><div class="highlight"><pre>    <span class="nx">Compile</span>
-    <span class="o">=======</span>
-    <span class="nx">Compile</span> <span class="nx">the</span> <span class="nx">main</span> <span class="nx">file</span> <span class="o">and</span> <span class="nx">aggregate</span> <span class="nx">files</span> <span class="nx">specified</span> <span class="k">by</span> <span class="nx">_@import_</span>
-    
-    <span class="o">`</span><span class="nx">file</span><span class="o">`</span> <span class="o">is</span> <span class="nx">the</span> <span class="nx">complete</span> <span class="nx">file</span> <span class="nx">path</span>
-    
-    <span class="o">`</span><span class="nx">options</span><span class="o">`</span> <span class="p">(</span><span class="nx">optional</span><span class="p">)</span> <span class="nx">are</span> <span class="nx">the</span> <span class="nv">options :</span>
 
-      <span class="o">-</span> <span class="o">`</span><span class="nx">minify</span><span class="o">`</span> <span class="o">:</span> <span class="nx">If</span> <span class="nx">it</span> <span class="nx">should</span> <span class="nx">minify</span> <span class="nx">the</span> <span class="nx">CSS</span>
+<h1>Compile</h1>
 
+<p>Compile the main file and aggregate files specified by <em>@import</em></p>
 
-    <span class="o">`</span><span class="nx">callback</span><span class="o">`</span> <span class="nx">has</span> <span class="nx">two</span> <span class="nx">argument</span><span class="p">.</span> <span class="o">`</span><span class="nx">err</span><span class="o">`</span> <span class="o">and</span> <span class="o">`</span><span class="nx">data</span><span class="o">`</span> <span class="nx">which</span> <span class="nx">contains</span> <span class="nx">the</span> <span class="nx">aggregated</span> <span class="nx">css</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><h1>#</h1>
-</td><td class="code"><div class="highlight"><pre>  <span class="nv">compile : </span><span class="nf">(file, options={}, callback)-&gt;</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><p>If there's no options, use it as the callback</p>
+<p><code>file</code> is the complete file path</p>
+
+<p><code>options</code> (optional) are the options :</p>
+
+<ul>
+<li><code>minify</code> : If it should minify the CSS</li>
+</ul>
+
+<p><code>callback</code> has two argument. <code>err</code> and <code>data</code> which contains the aggregated css</p>
+
+<h1>#</h1>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">compile : </span><span class="nf">(file, options={}, callback)-&gt;</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><p>If there's no options, use it as the callback</p>
 </td><td class="code"><div class="highlight"><pre>    <span class="p">[</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">options</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">options</span><span class="p">,</span> <span class="p">{}]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">options</span> <span class="o">==</span> <span class="s1">&#39;function&#39;</span>
     
     <span class="nx">fs</span><span class="p">.</span><span class="nx">realpath</span> <span class="nx">file</span><span class="p">,</span> <span class="nf">(err, resolved)-&gt;</span>
       <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">if</span> <span class="nx">err</span>
       
       <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span> <span class="nx">resolved</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">,</span> <span class="nf">(err, data)-&gt;</span>
-        <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">if</span> <span class="nx">err</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><p>Recursively load the css files and import the css from <code>@import</code></p>
-</td><td class="code"><div class="highlight"><pre>        <span class="nv">importFile = </span><span class="nf">(cssFile)-&gt;</span></pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><p>Find each import</p>
+        <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">if</span> <span class="nx">err</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><p>Recursively load the css files and import the css from <code>@import</code></p>
+</td><td class="code"><div class="highlight"><pre>        <span class="nv">importFile = </span><span class="nf">(cssFile)-&gt;</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><p>Find each import</p>
 </td><td class="code"><div class="highlight"><pre>          <span class="nv">imports = </span><span class="nx">data</span><span class="p">.</span><span class="nx">match</span> <span class="nx">r</span><span class="p">.</span><span class="nx">IMPORT</span>
 
           <span class="k">if</span> <span class="nx">imports</span><span class="o">?</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
             <span class="nv">importLine = </span><span class="nx">imports</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            </pre></div></td></tr><tr id="section-9"><td class="docs"><div class="pilwrap"><a href="#section-9" class="pilcrow">&#182;</a></div><p>Load the file</p>
+            </pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><p>Load the file</p>
 </td><td class="code"><div class="highlight"><pre>            <span class="nv">fileToImport = </span><span class="nx">r</span><span class="p">.</span><span class="nx">IMPORT_FILE</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">importLine</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
             <span class="nv">importCss = </span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">dirname</span><span class="p">(</span><span class="nx">cssFile</span><span class="p">),</span> <span class="nx">fileToImport</span><span class="p">))</span>
             
@@ -45,7 +49,7 @@
             <span class="nx">callback</span><span class="o">?</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
               
         <span class="nx">importFile</span><span class="p">(</span><span class="nx">resolved</span><span class="p">)</span>
-  </pre></div></td></tr><tr id="section-10"><td class="docs"><div class="pilwrap"><a href="#section-10" class="pilcrow">&#182;</a></div><p>Load a css file</p>
+  </pre></div></td></tr><tr id="section-9"><td class="docs"><div class="pilwrap"><a href="#section-9" class="pilcrow">&#182;</a></div><p>Load a css file</p>
 </td><td class="code"><div class="highlight"><pre>  <span class="nv">loadCss : </span><span class="nf">(file, callback)-&gt;</span>
     <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span> <span class="nx">file</span><span class="p">,</span> <span class="nf">(err, data)-&gt;</span>
       <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
@@ -53,4 +57,4 @@
       
 <span class="nv">module.exports = </span><span class="nx">r</span>
 
-</pre></div></td></tr></tbody></table><div id="generated">generated Tue May 29 2012 11:04:10 GMT-0400 (EDT)  </div></div></body></html>
+</pre></div></td></tr></tbody></table><div id="generated">generated Tue May 29 2012 11:08:19 GMT-0400 (EDT)  </div></div></body></html>
