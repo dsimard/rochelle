@@ -4,6 +4,7 @@
   "description": "Strange CSS journey from Milan to Minsk",
   "keywords": ["css", "aggregate", "compile", "compiler", "stylesheets"],
   "version": "0.0.1",
+  "preferGlobal": "true",
   "repository": {
     "type": "git",
     "url": "git://github.com/dsimard/rochelle.git"

@@ -5,3 +5,5 @@ Cakefile
 README.md
 .travis.yml
 .gitignore
+lib/*.coffee
+bin/*.coffee
