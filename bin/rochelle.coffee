@@ -5,7 +5,14 @@ path = require 'path'
 fs = require 'fs'
 
 # Define the usage
-usage = optimist.usage 'Usage: $0 FILES'
+usage = optimist.usage 'Usage: $0 FILES [OPTIONS]',
+  'minify': {
+        description: "If should minify the css"
+        boolean: true
+        default: false
+        alias: ['m']
+    }
+    
 usage.check ->
   throw 'FILES must be defined' if optimist.argv._.length == 0
   

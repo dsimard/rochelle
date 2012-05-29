@@ -58,6 +58,9 @@ r = # The internal name is just `r` because it's short
               data = data.replace importLine, loadedCss
               importFile(importCss)
           else
+            # Check if should minify
+            if options.minify then data = cleanCss.process(data);
+            
             callback?(null, data)
               
         importFile(resolved)

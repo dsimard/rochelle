@@ -41,16 +41,8 @@ describe 'Rochelle, Rochelle', ->
 
     it 'minifies the css', (done)->
       rochelle.compile './examples/multiple/main.css', {minify:true}, (err, data)->
-        data.ind
-      
-        previous = 0
-        
-        helper.multipleStyles().forEach (style)->
-          style = style.replace(/\s/, '')
-          data.indexOf(style).should.be.above previous
-          previous = data.indexOf(style)
-            
-      done()
+        data.indexOf("\n").should.eql -1
+        done()
     
     it 'loads in sub directories', (done)->
       rochelle.compile './examples/sub/main.css', (err, data)->
