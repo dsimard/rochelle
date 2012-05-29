@@ -1,5 +1,6 @@
-rochelle
-========
+# rochelle
+## Compile CSS in a single file using the @import rule
+
 
 Strange CSS journey from [Milan to Minsk][]
 
