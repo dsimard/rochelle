@@ -6,8 +6,8 @@ task 'doc', 'Regenerate doc', (options)->
     return console.log err if err?
     console.log stdout
     
-    exec 'cd docs && git commit -am "Doc regenerated automatically" && cd ..', (err, stdout, stderr)->
-      return console.log stderr if err?
+    #exec 'cd docs && git commit -am "Doc regenerated automatically" && cd ..', (err, stdout, stderr)->
+    #  return console.log stderr if err?
       
       
 task 'build', 'build scripts to be compatible with js', ->

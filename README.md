@@ -8,6 +8,12 @@ Strange CSS journey from [Milan to Minsk][]
 ## What does it do?
 It takes a css file and aggregate its [`@import`][import] rules to a single css file that has the same name
 
+## Usage
+    Usage: coffee ./bin/rochelle.coffee FILES [OPTIONS]
+
+    Options:
+      --minify, -m  If should minify the css  [boolean]  [default: false]
+
 ## Example
 Take these two files :
 
