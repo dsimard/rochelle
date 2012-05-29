@@ -19,7 +19,7 @@ convert = ->
     file = files.pop()
     
     # Convert it
-    r.load file, (err, data)->
+    r.compile file, (err, data)->
       return console.log err if err?
       
       # Write to a file

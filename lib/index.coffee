@@ -1,3 +1,7 @@
+###
+
+###
+
 fs = require 'fs'
 path = require 'path'
 {log, inspect} = require 'util'
@@ -8,17 +12,19 @@ r =
   IMPORT : /\@import[^;]+;/ig
   IMPORT_FILE : /\@import\s+(url\(\s*)?[\'\"]([^\'\"]+)/i
   
-  # Load the main file and aggregate files specified by _@import_
-  #
-  # `file` is the complete file path
-  #
-  # `options` (optional) are the options :
-  #
-  #   - `minify` : If it should minify the CSS
-  #
-  #
-  # `callback` has two argument. `err` and `data` which contains the aggregated css
-  load : (file, options={}, callback)->
+  ###
+  Compile the main file and aggregate files specified by _@import_
+  
+  `file` is the complete file path
+  
+  `options` (optional) are the options :
+
+    - `minify` : If it should minify the CSS
+
+
+  `callback` has two argument. `err` and `data` which contains the aggregated css
+  ###
+  compile : (file, options={}, callback)->
     # If there's no options, use it as the callback
     [callback, options] = [options, {}] if typeof options == 'function'
     

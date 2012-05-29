@@ -13,13 +13,13 @@ helper = require './helper'
 describe 'Rochelle, Rochelle', ->
   describe 'is simple', ->
     it 'fails when file does not exist', (done)->
-      rochelle.load "404.css", (err, data)->
+      rochelle.compile "404.css", (err, data)->
         should.exist err
         should.not.exist data
         done()
         
     it 'works', (done)->
-      rochelle.load './examples/simple/main.css', (err, data)->
+      rochelle.compile './examples/simple/main.css', (err, data)->
         should.not.exist err
         should.exist data
         data.should.not.include "@import 'imported.css';"
@@ -27,7 +27,7 @@ describe 'Rochelle, Rochelle', ->
         done()
         
     it 'stays in the same order than imports', (done)->
-      rochelle.load './examples/multiple/main.css', (err, data)->
+      rochelle.compile './examples/multiple/main.css', (err, data)->
         should.not.exist err
         data.should.not.include "@import"
 
@@ -40,7 +40,7 @@ describe 'Rochelle, Rochelle', ->
         done()
 
     it 'minifies the css', (done)->
-      rochelle.load './examples/multiple/main.css', {minify:true}, (err, data)->
+      rochelle.compile './examples/multiple/main.css', {minify:true}, (err, data)->
         data.ind
       
         previous = 0
@@ -53,7 +53,7 @@ describe 'Rochelle, Rochelle', ->
       done()
     
     it 'loads in sub directories', (done)->
-      rochelle.load './examples/sub/main.css', (err, data)->
+      rochelle.compile './examples/sub/main.css', (err, data)->
         should.not.exist err
         data.should.not.include "@import"
 
@@ -70,8 +70,8 @@ describe 'Rochelle command line', ->
     mainFiles = helper._mainFiles()
     unlink = (callback)-> 
       if mainFiles.length > 0
-        fs.unlink mainFiles.pop() 
-        unlink()
+        fs.unlink mainFiles.pop(), ->
+          unlink()
       else
         done()
         
@@ -103,6 +103,23 @@ describe 'Rochelle command line', ->
           if mainFiles.length > 0
             path.exists mainFiles.pop(), (exists)->
               exists.should.be.ok
+            check()
+          else
+            done()
+        
+        check()
+        
+    it "skip a files that doesn't exist", (done)->
+      mainFiles = helper._mainFiles().concat(["404.css"])
+      exec "coffee bin/rochelle.coffee #{helper.mainFiles().join(" ")}", (err, stdout, stderr)->
+        check = ->
+          if mainFiles.length > 0
+            file = mainFiles.pop()
+            path.exists file, (exists)->
+              if file == "404.css"
+                exists.should.not.be.ok
+              else
+                exists.should.be.ok
             check()
           else
             done()
