@@ -50,11 +50,13 @@ rochelle.compile 'path/to/file.css', (error, data)-&gt;
             <span class="nx">r</span><span class="p">.</span><span class="nx">loadCss</span> <span class="nx">importCss</span><span class="p">,</span> <span class="nf">(loadedCss)-&gt;</span>
               <span class="nv">data = </span><span class="nx">data</span><span class="p">.</span><span class="nx">replace</span> <span class="nx">importLine</span><span class="p">,</span> <span class="nx">loadedCss</span>
               <span class="nx">importFile</span><span class="p">(</span><span class="nx">importCss</span><span class="p">)</span>
-          <span class="k">else</span>
+          <span class="k">else</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><p>Check if should minify</p>
+</td><td class="code"><div class="highlight"><pre>            <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">minify</span> <span class="k">then</span> <span class="nv">data = </span><span class="nx">cleanCss</span><span class="p">.</span><span class="nx">process</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+            
             <span class="nx">callback</span><span class="o">?</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
               
         <span class="nx">importFile</span><span class="p">(</span><span class="nx">resolved</span><span class="p">)</span>
-  </pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><p>Load a css file</p>
+  </pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><p>Load a css file</p>
 </td><td class="code"><div class="highlight"><pre>  <span class="nv">loadCss : </span><span class="nf">(file, callback)-&gt;</span>
     <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span> <span class="nx">file</span><span class="p">,</span> <span class="nf">(err, data)-&gt;</span>
       <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
@@ -62,4 +64,4 @@ rochelle.compile 'path/to/file.css', (error, data)-&gt;
       
 <span class="nv">module.exports = </span><span class="nx">r</span>
 
-</pre></div></td></tr></tbody></table><div id="generated">generated Tue May 29 2012 11:27:43 GMT-0400 (EDT)  </div></div></body></html>
+</pre></div></td></tr></tbody></table><div id="generated">generated Tue May 29 2012 11:47:36 GMT-0400 (EDT)  </div></div></body></html>

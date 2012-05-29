@@ -4,7 +4,14 @@
 <span class="p">{</span><span class="nx">log</span><span class="p">,</span> <span class="nx">inspect</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;util&#39;</span>
 <span class="nv">path = </span><span class="nx">require</span> <span class="s1">&#39;path&#39;</span>
 <span class="nv">fs = </span><span class="nx">require</span> <span class="s1">&#39;fs&#39;</span></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><p>Define the usage</p>
-</td><td class="code"><div class="highlight"><pre><span class="nv">usage = </span><span class="nx">optimist</span><span class="p">.</span><span class="nx">usage</span> <span class="s1">&#39;Usage: $0 FILES&#39;</span>
+</td><td class="code"><div class="highlight"><pre><span class="nv">usage = </span><span class="nx">optimist</span><span class="p">.</span><span class="nx">usage</span> <span class="s1">&#39;Usage: $0 FILES [OPTIONS]&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;minify&#39;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nv">description: </span><span class="s2">&quot;If should minify the css&quot;</span>
+        <span class="nv">boolean: </span><span class="kc">true</span>
+        <span class="nv">default: </span><span class="kc">false</span>
+        <span class="nv">alias: </span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+    
 <span class="nx">usage</span><span class="p">.</span><span class="nx">check</span> <span class="o">-&gt;</span>
   <span class="k">throw</span> <span class="s1">&#39;FILES must be defined&#39;</span> <span class="k">if</span> <span class="nx">optimist</span><span class="p">.</span><span class="nx">argv</span><span class="p">.</span><span class="nx">_</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span>
   
@@ -26,4 +33,4 @@
 <span class="nx">convert</span><span class="p">()</span>
     
 
-</pre></div></td></tr></tbody></table><div id="generated">generated Tue May 29 2012 11:27:43 GMT-0400 (EDT)  </div></div></body></html>
+</pre></div></td></tr></tbody></table><div id="generated">generated Tue May 29 2012 11:47:36 GMT-0400 (EDT)  </div></div></body></html>
