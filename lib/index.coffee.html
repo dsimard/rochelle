@@ -1,8 +1,11 @@
 <!DOCTYPE html><html><head><title>index.coffee</title><meta http-equiv="Content-Type" content="text/html" charset="UTF-8"><link rel="stylesheet" media="all" href="../docco.css"></head><body><div id="container"><div id="background"></div><div id="jump_to">Jump To &hellip;<div id="jump_wrapper"><div id="jump_page"><a href="../index.html" class="source"><span class="file_name">README</span></a><a href="../bin/rochelle.coffee.html" class="source "><span class="base_path">bin / </span><span class="file_name">rochelle.coffee</span></a><a href="../lib/index.coffee.html" class="source selected"><span class="base_path">lib / </span><span class="file_name">index.coffee</span></a></div></div></div><table cellpadding="0" cellspacing="0"><thead><tr><th class="docs"><h1>index.coffee</h1><div class="filepath">lib/</div></th><th class="code"></th></tr></thead><tbody><tr id="section-1"><td class="docs"><div class="pilwrap"><a href="#section-1" class="pilcrow">&#182;</a></div><h2>How to use as a library</h2>
 
-<pre><code>rochelle = require 'rochelle' # require rochelle
-rochelle.compile 'path/to/file', (error, data)-&gt; # compile a file
-  return console.log error if error? # If there's an error, log it and stop here
+<pre><code>rochelle = require 'rochelle'
+rochelle.compile 'path/to/file', (error, data)-&gt;
+  return console.log error if error?
+
+  # Print the compiled CSS to screen
+  console.log data
 </code></pre>
 </td><td class="code"><div class="highlight"><pre><span class="nv">fs = </span><span class="nx">require</span> <span class="s1">&#39;fs&#39;</span>
 <span class="nv">path = </span><span class="nx">require</span> <span class="s1">&#39;path&#39;</span>
@@ -57,4 +60,4 @@ rochelle.compile 'path/to/file', (error, data)-&gt; # compile a file
       
 <span class="nv">module.exports = </span><span class="nx">r</span>
 
-</pre></div></td></tr></tbody></table><div id="generated">generated Tue May 29 2012 11:15:42 GMT-0400 (EDT)  </div></div></body></html>
+</pre></div></td></tr></tbody></table><div id="generated">generated Tue May 29 2012 11:16:26 GMT-0400 (EDT)  </div></div></body></html>
