@@ -57,6 +57,10 @@ describe 'Rochelle, Rochelle', ->
             
         done()
         
+    it 'compiles stylus', (done)->
+      rochelle.compile './examples/stylus/main.styl', (err, data)->
+        
+        
 describe 'Rochelle command line', ->
   afterEach (done)->
     mainFiles = helper._mainFiles()
