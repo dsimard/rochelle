@@ -13,6 +13,7 @@
 fs = require 'fs'
 path = require 'path'
 {log, inspect} = require 'util'
+stylus = require '../node_modules/stylus'
 cleanCss = require '../node_modules/clean-css'
 
 r = # The internal name is just `r` because it's short
@@ -35,11 +36,11 @@ r = # The internal name is just `r` because it's short
   compile : (file, options={}, callback)->
     # If there's no options, use it as the callback
     [callback, options] = [options, {}] if typeof options == 'function'
-    
+
     fs.realpath file, (err, resolved)->
       return callback?(err) if err
       
-      fs.readFile resolved, 'utf8', (err, data)->
+      r.loadCss resolved, (err, data)->
         return callback?(err) if err
 
         # Recursively load the css files and import the css from `@import`
@@ -54,7 +55,8 @@ r = # The internal name is just `r` because it's short
             fileToImport = r.IMPORT_FILE.exec(importLine)[2]
             importCss = path.resolve(path.join(path.dirname(cssFile), fileToImport))
             
-            r.loadCss importCss, (loadedCss)->
+            r.loadCss importCss, (err, loadedCss)->
+              return callback err if err?
               data = data.replace importLine, loadedCss
               importFile(importCss)
           else
@@ -66,9 +68,29 @@ r = # The internal name is just `r` because it's short
         importFile(resolved)
   
   # Load a css file
-  loadCss : (file, callback)->
-    fs.readFile file, (err, data)->
+  #
+  #`filename` is the complete filename
+  #
+  #`callback` has two argument `(error, data)` which contains the aggregated css.
+  loadCss : (filename, callback)->
+    fs.readFile filename, 'utf8', (err, data)->
       return callback err if err
-      callback(data)
+      r.transform filename, data, (err, transformed)->
+        callback(err, transformed)
+      
+  # Transform the source based on the extension
+  #
+  #`filename` is the complete filename
+  #
+  #`source` is the source code linked to the filename
+  #
+  #`callback` has two argument `(error, data)` which contains the aggregated css.
+  transform : (filename, source, callback)->
+    switch path.extname(filename).toLowerCase()
+      when '.styl'
+        stylus.render source, (err, css)->
+          return callback err if err?
+          callback err, css
+      else callback null, source
       
 module.exports = r

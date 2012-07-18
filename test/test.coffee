@@ -11,7 +11,7 @@ helper = require './helper'
 
 
 describe 'Rochelle, Rochelle', ->
-  describe 'is simple', ->
+  describe 'is simple and', ->
     it 'fails when file does not exist', (done)->
       rochelle.compile "404.css", (err, data)->
         should.exist err
@@ -56,10 +56,14 @@ describe 'Rochelle, Rochelle', ->
           previous = data.indexOf(style)
             
         done()
-        
+
     it 'compiles stylus', (done)->
       rochelle.compile './examples/stylus/main.styl', (err, data)->
-        
+        should.not.exist err
+        data.should.include "{"
+        data.should.include "import1.css"
+        data.should.include "import2.styl"
+        done()
         
 describe 'Rochelle command line', ->
   afterEach (done)->

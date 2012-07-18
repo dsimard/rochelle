@@ -18,8 +18,9 @@
     "publish": "cake clean"
   },
   "dependencies": {
-    "clean-css": "~0.3.2",
-    "optimist" : "~0.3.4"
+    "clean-css" : "~0.3.2",
+    "optimist" : "~0.3.4",
+    "stylus" : "~0.28.2"
   },
   "devDependencies": {
     "mocha"   : "~1.0.3",
